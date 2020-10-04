@@ -3,8 +3,7 @@
 TDF="$HOME/Code/dotfiles"
 
 are-you-sure() {
-  echo "Ready to continue?"
-  local -r sure
+  read -rp "Ready to continue? [y/n] " sure
   if [[ $sure != "y" && $sure != "Y" ]]
   then
     exit
@@ -19,7 +18,7 @@ cleanup() {
 }
 
 install-software() {
-  sudo dpkg --set-selections <"$TDF/package.list"
+  sudo dpkg --set-selections <"$TDF/packages.list"
   sudo apt-get update && sudo apt-get -u dselect-upgrade
 
   # todo firefox : momentum
@@ -37,10 +36,11 @@ link-dotfiles() {
 
 clone() {
   sudo apt-get install git
+  git clone https://github.com/tiliavir/dotfiles.git "$TDF"
 
   mkdir "$HOME/Code"
   cd "$HOME/Code" || exit
-  while local -r repo; do
+  while read -r repo; do
     git clone "$repo"
   done <"$TDF/repos.list"
   cd - || exit
