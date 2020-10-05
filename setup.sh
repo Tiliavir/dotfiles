@@ -18,6 +18,7 @@ cleanup() {
 }
 
 install-software() {
+  # shellcheck disable=SC2024
   sudo dpkg --set-selections <"$TDF/packages.list"
   sudo apt-get update && sudo apt-get -u dselect-upgrade
 
@@ -48,7 +49,7 @@ clone() {
 
 style() {
   # Install Git Icons: https://github.com/chrisjbillington/git-nautilus-icons
-  sudo apt-get install python3-gi python3-nemo python3-pip
+  sudo apt-get install python3-gi python-nemo python3-pip
   pip3 install --user git-nautilus-icons
 
   # Link images
