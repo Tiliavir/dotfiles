@@ -11,8 +11,8 @@ are-you-sure() {
 }
 
 cleanup() {
-  sudo apt-get remove --purge libreoffice*
-  sudo apt-get remove --purge thunderbird
+  sudo apt-get remove -y --purge libreoffice*
+  sudo apt-get remove -y --purge thunderbird
   sudo apt-get clean
   sudo apt-get autoremove
 }
@@ -35,7 +35,7 @@ link-dotfiles() {
 }
 
 clone() {
-  sudo apt-get install git
+  sudo apt-get install -y git
   git clone https://github.com/tiliavir/dotfiles.git "$TDF"
 
   mkdir "$HOME/Code"
