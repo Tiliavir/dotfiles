@@ -1,5 +1,6 @@
 # Linux Mint 20 Customization Script
 This script documents my Linux Mint Cinnamon 20 "Ulyana" installation.
+
 This follows my preferences, therefore I do not recommend to use this script as
 is - you should most probably fork and adjust it according to your needs!
 
@@ -9,6 +10,7 @@ bash -c "$(curl -fsSL https://raw.github.com/tiliavir/dotfiles/main/setup.sh)"
 ```
 
 Alternatively you can clone this repository and run it locally.
+
 *If you do that, consider adjusting the $TDF variable!*
 
 ## What will it do? 
