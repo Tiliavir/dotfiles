@@ -49,7 +49,6 @@ clone() {
 
 style() {
   # Install Git Icons: https://github.com/chrisjbillington/git-nautilus-icons
-  sudo apt-get install python3-gi python-nemo python3-pip
   pip3 install --user git-nautilus-icons
 
   # Link images
