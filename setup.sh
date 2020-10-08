@@ -66,10 +66,11 @@ style() {
 
 additionals() {
   echo "Additional steps:
- - momentum for firefox
  - intellij idea, download, not flatpak!
  - create new GitHub SSH key and store in ~/Code/tiliavir_rsa
- - set users/pwds in Filezilla
+ - clone CV and Thesis
+ - set users/pwds in FileZilla
+ - momentum for firefox
 
 Optional steps:
  - grub-customizer"
