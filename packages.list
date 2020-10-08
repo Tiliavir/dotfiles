@@ -7,5 +7,7 @@ nodejs	install
 npm	install
 passwordsafe	install
 python3-pip	install
+python3-gi	install
+python-nemo	install
 texlive-full	install
 texmaker	install
