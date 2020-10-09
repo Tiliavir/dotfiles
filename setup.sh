@@ -57,7 +57,7 @@ style() {
   ln -s "$TDF/img/profile.png" "$HOME/Pictures/profile.png"
 
   # linux mint theme including key-bindings
-  dconf load /org/cinnamon/ <"$TDF/cinnamon_desktop_backup"
+  dconf load /org/cinnamon/ <"$TDF/cinnamon-backup"
 
   # Terminal config: https://ohmybash.github.io/
   sh -c "$(curl -fsSL https://raw.github.com/ohmybash/oh-my-bash/master/tools/install.sh)"
