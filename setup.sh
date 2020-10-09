@@ -56,6 +56,8 @@ style() {
   ln -s "$TDF/img/grub.png" "$HOME/Pictures/grub.png"
   ln -s "$TDF/img/profile.png" "$HOME/Pictures/profile.png"
 
+  $TDF/Code/We10X-icon-theme/install.sh
+
   # linux mint theme including key-bindings
   dconf load /org/cinnamon/ <"$TDF/cinnamon-backup"
 
