@@ -69,6 +69,7 @@ style() {
   "$HOME/Code/We10X-icon-theme/install.sh"
 
   # linux mint theme including key-bindings
+  sed -i.bak -e "s|/home/markus/|$HOME/|g" "$TDF/cinnamon-backup"
   dconf load /org/cinnamon/ <"$TDF/cinnamon-backup"
 
   # Terminal config: https://ohmybash.github.io/

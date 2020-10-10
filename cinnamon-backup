@@ -41,7 +41,7 @@ panels-show-delay=['1:0', '2:0']
 quit-time-delay=60
 
 [desktop/background]
-picture-uri='file://~/Pictures/bg.jpg'
+picture-uri='file:///home/markus/Pictures/bg.jpg'
 
 [desktop/background/slideshow]
 delay=15
