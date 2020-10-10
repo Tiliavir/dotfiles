@@ -27,6 +27,14 @@ install-software() {
 }
 
 link-dotfiles() {
+  if [ ! -d "$HOME/.ssh" ]; then
+    mkdir -p "$HOME/.ssh"
+  fi
+
+  if [ ! -d "$HOME/.config/filezilla" ]; then
+    mkdir -p "$HOME/.config/filezilla"
+  fi
+
   ln -sf "$TDF/config/.gitconfig" "$HOME/.gitconfig"
   ln -sf "$TDF/config/.bashrc" "$HOME/.bashrc"
   ln -sf "$TDF/config/.ssh/config" "$HOME/.ssh/config"
@@ -39,7 +47,6 @@ clone() {
   sudo apt-get install -y git
   git clone https://github.com/tiliavir/dotfiles.git "$TDF"
 
-  mkdir "$HOME/Code"
   cd "$HOME/Code" || exit
   while read -r repo; do
     git clone "$repo"
@@ -56,14 +63,14 @@ style() {
   ln -s "$TDF/img/grub.png" "$HOME/Pictures/grub.png"
   ln -s "$TDF/img/profile.png" "$HOME/Pictures/profile.png"
 
-  "$TDF/Code/We10X-icon-theme/install.sh"
+  "$HOME/Code/We10X-icon-theme/install.sh"
 
   # linux mint theme including key-bindings
   dconf load /org/cinnamon/ <"$TDF/cinnamon-backup"
 
   # Terminal config: https://ohmybash.github.io/
-  sh -c "$(curl -fsSL https://raw.github.com/ohmybash/oh-my-bash/master/tools/install.sh)"
-  sed -i .bak -e "s/OSH_THEME=.*/OSH_THEME=\"mbriggs\"/" "$HOME/.bashrc"
+  (sh -c "$(curl -fsSL https://raw.github.com/ohmybash/oh-my-bash/master/tools/install.sh)")
+  sed -i.bak -e "s/OSH_THEME=.*/OSH_THEME=\"mbriggs\"/" "$HOME/.bashrc"
 }
 
 additionals() {
