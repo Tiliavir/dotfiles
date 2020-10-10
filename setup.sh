@@ -44,6 +44,9 @@ link-dotfiles() {
   ln -sf "$TDF/config/.config/filezilla/sitemanager.xml" "$HOME/.config/filezilla/sitemanager.xml"
   ln -sf "$TDF/config/.config/autostart/Flameshot.desktop" "$HOME/.config/autostart/Flameshot.desktop"
   ln -sf "$TDF/config/.config/autostart/kupfer.desktop" "$HOME/.config/autostart/kupfer.desktop"
+
+  ln -sf "$TDF/config/.themes/" "$HOME/"
+  ln -sf "$TDF/config/.local/share/cinnamon" "$HOME/.local/share"
 }
 
 clone() {
