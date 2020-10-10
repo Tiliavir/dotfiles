@@ -18,6 +18,9 @@ cleanup() {
 }
 
 install-software() {
+  sudo apt-get install -y dselect
+  sudo dselect update
+
   # shellcheck disable=SC2024
   sudo dpkg --set-selections <"$TDF/packages.list"
   sudo apt-get update && sudo apt-get -u dselect-upgrade
