@@ -1,7 +1,9 @@
 # Linux Mint 20 Customization Script
-This script documents my Linux Mint Cinnamon 20 "Ulyana" installation.
+[![Build State](https://github.com/tiliavir/dotfiles/workflows/Shellcheck/badge.svg)](https://github.com/Tiliavir/mvw-creator/actions)
 
-This follows my preferences, therefore I do not recommend to use this script as
+This script documents my Linux Mint Cinnamon 20 "Ulyana" setup.
+
+This follows my preferences, therefore I do not recommend using this script as
 is - you should most probably fork and adjust it according to your needs!
 
 ## Execution
