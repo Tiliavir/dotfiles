@@ -79,7 +79,7 @@ style() {
   ln -s "$TDF/img/grub.png" "$HOME/Pictures/grub.png"
   ln -s "$TDF/img/profile.png" "$HOME/Pictures/profile.png"
 
-  flameshot -t false
+  flameshot config -t false
 
   "$HOME/Code/We10X-icon-theme/install.sh"
 
@@ -96,6 +96,7 @@ additionals() {
   printf "\nAdditional\n==========\n";
   echo " - intellij idea, download, not flatpak!
  - create new GitHub SSH key and store in ~/Code/tiliavir_rsa
+ - load cinnamon-menu.json config (right click on Starter icon > Configure)
  - clone CV and Thesis
  - set users/pwds in FileZilla
  - momentum for firefox
