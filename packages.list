@@ -12,3 +12,4 @@ python-nemo	install
 texlive-full	install
 texmaker	install
 musescore3	install
+hugo	install

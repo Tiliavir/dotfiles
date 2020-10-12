@@ -11,13 +11,15 @@ are-you-sure() {
 }
 
 cleanup() {
-  sudo apt-get remove -y --purge libreoffice*
-  sudo apt-get remove -y --purge thunderbird
+  printf "\nCleanup\n=======\n";
+  sudo apt-get remove -yq --purge libreoffice*
+  sudo apt-get remove -yq --purge thunderbird
   sudo apt-get clean
   sudo apt-get autoremove
 }
 
 install-software() {
+  printf "\nInstall\n=======\n";
   sudo apt-get install -y dselect
   sudo dselect update
 
@@ -30,6 +32,7 @@ install-software() {
 }
 
 link-dotfiles() {
+  printf "\nConfig\n======\n";
   if [ ! -d "$HOME/.ssh" ]; then
     mkdir -p "$HOME/.ssh"
   fi
@@ -41,6 +44,7 @@ link-dotfiles() {
   ln -sf "$TDF/config/.gitconfig" "$HOME/.gitconfig"
   ln -sf "$TDF/config/.bashrc" "$HOME/.bashrc"
   ln -sf "$TDF/config/.ssh/config" "$HOME/.ssh/config"
+  ln -sf "$TDF/config/.config/kupfer/kupfer.cfg" "$HOME/.config/kupfer/kupfer.cfg"
   ln -sf "$TDF/config/.config/filezilla/sitemanager.xml" "$HOME/.config/filezilla/sitemanager.xml"
   ln -sf "$TDF/config/.config/autostart/Flameshot.desktop" "$HOME/.config/autostart/Flameshot.desktop"
   ln -sf "$TDF/config/.config/autostart/kupfer.desktop" "$HOME/.config/autostart/kupfer.desktop"
@@ -50,8 +54,13 @@ link-dotfiles() {
 }
 
 clone() {
+  printf "\nClone\n=====\n";
   sudo apt-get install -y git
   git clone https://github.com/tiliavir/dotfiles.git "$TDF"
+
+  cd "$TDF" || exit
+  git pull
+  cd - || exit
 
   cd "$HOME/Code" || exit
   while read -r repo; do
@@ -61,6 +70,7 @@ clone() {
 }
 
 style() {
+  printf "\nStyle\n=====\n";
   # Install Git Icons: https://github.com/chrisjbillington/git-nautilus-icons
   pip3 install --user git-nautilus-icons
 
@@ -68,6 +78,8 @@ style() {
   ln -s "$TDF/img/bg.jpg" "$HOME/Pictures/bg.jpg"
   ln -s "$TDF/img/grub.png" "$HOME/Pictures/grub.png"
   ln -s "$TDF/img/profile.png" "$HOME/Pictures/profile.png"
+
+  flameshot -t false
 
   "$HOME/Code/We10X-icon-theme/install.sh"
 
@@ -81,8 +93,8 @@ style() {
 }
 
 additionals() {
-  echo "Additional steps:
- - intellij idea, download, not flatpak!
+  printf "\nAdditional\n==========\n";
+  echo " - intellij idea, download, not flatpak!
  - create new GitHub SSH key and store in ~/Code/tiliavir_rsa
  - clone CV and Thesis
  - set users/pwds in FileZilla
