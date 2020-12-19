@@ -185,6 +185,7 @@ var WeatherApplet = (function (_super) {
         };
         _this.log = new Log(instanceId);
         _this.currentLocale = _this.constructJsLocale(get_language_names()[0]);
+        _this.log.Debug("Applet created with instanceID " + instanceId);
         _this.log.Debug("System locale is " + _this.currentLocale);
         _this.log.Debug("Appletdir is: " + _this.appletDir);
         _this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
@@ -743,7 +744,6 @@ var Log = (function () {
 var UI = (function () {
     function UI(app, orientation) {
         this.hourlyToggled = false;
-        this.hourlyNeverOpened = true;
         this.lightTheme = false;
         this.app = app;
         this.menuManager = new PopupMenuManager(this.app);
@@ -758,7 +758,6 @@ var UI = (function () {
         this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
     }
     UI.prototype.OnThemeChanged = function () {
-        this.hourlyNeverOpened = true;
         this.HideHourlyWeather();
         var newThemeIsLight = this.IsLightTheme();
         if (newThemeIsLight != this.lightTheme) {
@@ -846,7 +845,6 @@ var UI = (function () {
         this.rebuildHourlyWeatherUi(config);
         this.rebuildFutureWeatherUi(config);
         this.rebuildBar(config);
-        this.hourlyNeverOpened = true;
     };
     UI.prototype.UpdateIconType = function (iconType) {
         if (iconType == IconType.FULLCOLOR && this.app.config._useCustomMenuIcons)
@@ -864,18 +862,18 @@ var UI = (function () {
     };
     UI.prototype.ShowHourlyWeather = function () {
         var _this = this;
-        if (this.hourlyNeverOpened) {
-            this.hourlyNeverOpened = false;
-            this._hourlyScrollView.show();
-            this._hourlyScrollView.hide();
-        }
-        var _a = this._hourlyScrollView.get_preferred_height(-1), minHeight = _a[0], naturalHeight = _a[1];
-        var _b = this._hourlyScrollView.get_preferred_width(-1), minWidth = _b[0], naturalWidth = _b[1];
+        this._hourlyScrollView.show();
+        this._hourlyScrollView.hide();
+        this.AdjustHourlyBoxItemWidth();
+        var _a = this._hourlyScrollView.get_preferred_width(-1), minWidth = _a[0], naturalWidth = _a[1];
+        var _b = this._hourlyScrollView.get_preferred_height(minWidth), minHeight = _b[0], naturalHeight = _b[1];
+        this.app.log.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
         this._hourlyScrollView.set_width(minWidth);
         this._separatorAreaHourly.actor.show();
         if (!!this._hourlyButton.child)
             this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
         this._hourlyScrollView.show();
+        this._hourlyScrollView.style = "min-height: " + naturalHeight.toString() + "px;";
         if (global.settings.get_boolean("desktop-effects-on-menus")) {
             this._hourlyScrollView.height = 0;
             addTween(this._hourlyScrollView, {
@@ -1139,9 +1137,63 @@ var UI = (function () {
                     ui.Precipitation.text = precipitationText;
             }
         }
+        this.AdjustHourlyBoxItemWidth();
         if (max <= 0)
             this.HideHourlyToggle();
         return true;
+    };
+    UI.prototype.AdjustHourlyBoxItemWidth = function () {
+        var requiredWidth = 0;
+        for (var index = 0; index < this._hourlyForecastBoxes.length; index++) {
+            var ui = this._hourlyForecasts[index];
+            var hourWidth = ui.Hour.get_preferred_width(-1)[1];
+            var iconWidth = ui.Icon.get_preferred_width(-1)[1];
+            var summaryWidth = ui.Summary.get_preferred_width(-1)[1];
+            var temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
+            var precipitationWidth = ui.Precipitation.get_preferred_width(-1)[1];
+            if (precipitationWidth > iconWidth || summaryWidth > iconWidth) {
+                if (precipitationWidth > summaryWidth)
+                    precipitationWidth += 10;
+                else
+                    summaryWidth += 10;
+            }
+            if (requiredWidth < hourWidth)
+                requiredWidth = hourWidth;
+            if (requiredWidth < iconWidth)
+                requiredWidth = iconWidth;
+            if (requiredWidth < summaryWidth)
+                requiredWidth = summaryWidth;
+            if (requiredWidth < temperatureWidth)
+                requiredWidth = temperatureWidth;
+            if (requiredWidth < precipitationWidth)
+                requiredWidth = precipitationWidth;
+        }
+        for (var index = 0; index < this._hourlyForecastBoxes.length; index++) {
+            var element = this._hourlyForecastBoxes[index];
+            element.set_width(requiredWidth);
+        }
+    };
+    UI.prototype.GetScrollViewHeight = function () {
+        var boxItemHeight = 0;
+        for (var index = 0; index < this._hourlyForecastBoxes.length; index++) {
+            var ui = this._hourlyForecasts[index];
+            this.app.log.Debug("Height requests of Hourly box Items: " + index);
+            var hourHeight = ui.Hour.get_preferred_height(-1)[1];
+            var iconHeight = ui.Icon.get_preferred_height(-1)[1];
+            var summaryHeight = ui.Summary.get_preferred_height(-1)[1];
+            var temperatureHeight = ui.Temperature.get_preferred_height(-1)[1];
+            var precipitationHeight = ui.Precipitation.get_preferred_height(-1)[1];
+            var itemheight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
+            if (boxItemHeight < itemheight)
+                boxItemHeight = itemheight;
+        }
+        this.app.log.Debug("Final Hourly box item height is: " + boxItemHeight);
+        var scrollBarHeight = this._hourlyScrollView.get_hscroll_bar().get_preferred_width(-1)[1];
+        this.app.log.Debug("Scrollbar height is " + scrollBarHeight);
+        var theme = this._hourlyBox.get_theme_node();
+        var styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
+        this.app.log.Debug("ScollbarBox vertical padding and margin is: " + styling);
+        return (boxItemHeight + scrollBarHeight + styling);
     };
     UI.prototype.unitToUnicode = function (unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';
@@ -1410,8 +1462,10 @@ var UI = (function () {
         this.destroyHourlyWeather();
         var hours = this.app.GetMaxHourlyForecasts();
         this._hourlyForecasts = [];
+        this._hourlyForecastBoxes = [];
         for (var index = 0; index < hours; index++) {
-            var box = new BoxLayout({ vertical: true });
+            var box = new BoxLayout({ vertical: true, style_class: "hourly-box-item" });
+            this._hourlyForecastBoxes.push(box);
             this._hourlyForecasts.push({
                 Hour: new Label({ text: "Hour", style_class: "hourly-time", style: this.GetTextColorStyle() }),
                 Icon: new Icon({
@@ -1425,7 +1479,6 @@ var UI = (function () {
                 Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" })
             });
             this._hourlyForecasts[index].Summary.clutter_text.set_line_wrap(true);
-            this._hourlyForecasts[index].Summary.set_width(85);
             box.add_child(this._hourlyForecasts[index].Hour);
             box.add_child(this._hourlyForecasts[index].Icon);
             box.add_child(this._hourlyForecasts[index].Summary);
@@ -1739,7 +1792,7 @@ var WeatherButton = (function () {
 var GeoLocation = (function () {
     function GeoLocation(app) {
         this.url = "https://nominatim.openstreetmap.org/search/";
-        this.params = "?format=json&addressdetails=1";
+        this.params = "?format=json&addressdetails=1&limit=1";
         this.app = null;
         this.cache = {};
         this.app = app;
@@ -1777,7 +1830,7 @@ var GeoLocation = (function () {
                             timeZone: null,
                             mobile: null,
                             address_string: locationData[0].display_name,
-                            entryText: locationData[0].display_name,
+                            entryText: this.BuildEntryText(locationData[0]),
                             locationSource: "address-search"
                         };
                         this.cache[searchText] = result;
@@ -1795,6 +1848,21 @@ var GeoLocation = (function () {
                 }
             });
         });
+    };
+    GeoLocation.prototype.BuildEntryText = function (locationData) {
+        if (locationData.address == null)
+            return locationData.display_name;
+        var entryText = [];
+        for (var key in locationData.address) {
+            if (key == "state_district")
+                continue;
+            if (key == "county")
+                continue;
+            if (key == "country_code")
+                continue;
+            entryText.push(locationData.address[key]);
+        }
+        return entryText.join(", ");
     };
     return GeoLocation;
 }());
