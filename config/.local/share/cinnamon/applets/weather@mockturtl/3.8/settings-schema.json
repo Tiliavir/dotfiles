@@ -2,7 +2,8 @@
 	"layout": {
         "type":"layout",
         "pages":[
-            "providers",
+			"providers",
+			"locations-page",
             "presentation-section",
 			"units-page",
 			"info-section"
@@ -13,6 +14,14 @@
             "sections":[
 				"provider-options",
 				"weather-conditions"
+            ]
+		},
+		"locations-page":{
+            "type":"page",
+            "title":"Location",
+            "sections": [
+				"location-section",
+				"location-store"
             ]
         },
         "presentation-section":{
@@ -42,16 +51,28 @@
 				"submit-issue"
 			]
 		},
+		"location-section" : {
+			"type":"section",
+			"title":"Location settings",
+			"keys":[
+				"manualLocation",
+				"location"
+			]
+		},
+		"location-store" : {
+			"type":"section",
+			"title":"Saved Locations",
+			"keys":[
+				"locationList",
+				"saveLocation"
+			]
+		},
 		"provider-options" : {
 			"type":"section",
 			"title":"Weather Provider Options",
 			"keys":[
 				"dataService",
 				"apiKey",
-				"manualLocation",
-				"location",
-				"saveLocation",
-				"deleteLocation",
 				"refreshInterval",
 				"forecastDays",
 				"forecastHours"
@@ -83,6 +104,8 @@
 				"forecastRows",
 				"showSunrise",
 				"show24Hours",
+				"showForecastDates",
+				"shortHourlyTime",
 				"temperatureHighFirst",
 				"tempRussianStyle",
 				"locationLabelOverride"
@@ -158,10 +181,12 @@
 		"options": {
 			"OpenWeatherMap": "OpenWeatherMap",
 			"DarkSky (key needed)": "DarkSky",
+			"Visual Crossing (key needed)": "Visual Crossing",
 			"MET Norway": "MetNorway",
 			"Weatherbit (key needed)": "Weatherbit",
 			"Yahoo": "Yahoo",
-			"Climacell (key needed)": "Climacell",
+			"ClimacellV4 (key needed)": "ClimacellV4",
+			"ClimacellV3 (key needed)": "Climacell",
 			"Met Office UK (UK only)": "Met Office UK",
 			"US National Weather (US only)": "US Weather"
 		}
@@ -183,23 +208,14 @@
 		"default": "London,UK",
 		"dependency": "manualLocation",
 		"description": "Location",
-		"tooltip": "Acceptable inputs are Latitude,Longitude. e.g.: 68.1932,17.1426 or an address.\nWaits for 3 seconds after you stop typing then refreshes the weather."
+		"tooltip": "Acceptable inputs are Latitude,Longitude. e.g.: 68.1932,17.1426 or an address.\nWaits for 3 seconds after you stop typing before refreshes the weather."
 	},
 	"saveLocation": {
 		"type": "button",
 		"indent": true,
 		"description": "Save current location to storage",
 		"callback": "saveCurrentLocation",
-		"dependency": "manualLocation",
 		"tooltip": "Saves location information to file, so you can switch between them with buttons in the applet (what will appear if you have more than one)."
-	},
-	"deleteLocation": {
-		"type": "button",
-		"indent": true,
-		"description": "Delete current location from storage",
-		"callback": "deleteCurrentLocation",
-		"dependency": "manualLocation",
-		"tooltip": "Removes location information from storage file."
 	},
 	"getLocation": {
 		"type": "button",
@@ -237,18 +253,21 @@
 	},
 	"temperatureUnit": {
 		"type": "radiogroup",
-		"default": "celsius",
+		"default": "automatic",
 		"description": "Temperature unit",
 		"options": {
-		"celsius": "celsius",
-		"fahrenheit": "fahrenheit"
-		}
+			"Automatic": "automatic",
+			"celsius": "celsius",
+			"fahrenheit": "fahrenheit"
+		},
+		"tooltip": "Automatic will try to guess your preference based your current display language."
 	},
 	"windSpeedUnit": {
 		"type": "combobox",
-		"default": "kph",
+		"default": "automatic",
 		"description": "Wind speed unit",
 		"options": {
+			"Automatic": "automatic",
 			"kph": "kph",
 			"mph": "mph",
 			"m/s": "m/s",
@@ -272,12 +291,14 @@
 	},
 	"distanceUnit": {
 		"type": "combobox",
-		"default": "metric",
+		"default": "automatic",
 		"description": "Distance unit",
 		"options": {
+			"Automatic": "automatic",
 			"Metric": "metric",
 			"Imperial": "imperial"
-		}
+		},
+		"tooltip": "Automatic will try to guess your preference based your current display language."
 	},
 	"showTextInPanel": {
 		"type": "checkbox",
@@ -326,6 +347,19 @@
 		"step": 1,
 		"description": "Maximum number of rows for forecast"
 	},
+	"locationList": {
+		"type" : "list",
+		"description" : "Your saved locations",
+		"columns" : [
+			{"id": "lat", "title": "Latitude", "type": "float", "min": -85, "max": 85},
+			{"id": "lon", "title": "Longitude", "type": "float", "min": -180, "max": 180},
+			{"id": "city", "title": "City", "type": "string"},
+			{"id": "country", "title": "Country", "type": "string"},
+			{"id": "timeZone", "title": "Timezone", "type": "string", "default": ""},
+			{"id": "entryText", "title": "Search entry", "type": "string", "default": ""}
+		],
+		"default" : []
+	},
 	"showSunrise": {
 		"type": "checkbox",
 		"default": true,
@@ -340,6 +374,18 @@
 		"type": "checkbox",
 		"default": false,
 		"description": "Show high temperature first in forecast"
+	},
+	"shortHourlyTime": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Only display hours for hourly forecast time",
+		"tooltip": "Instead of 15:00 or 3 pm it will show up as 15 or 3 pm"
+	},
+	"showForecastDates": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Display date for daily forecasts",
+		"tooltip": "Like \"Friday 15\""
 	},
 	"tempRussianStyle": {
 		"type": "checkbox",
@@ -360,7 +406,7 @@
 		"type": "checkbox",
 		"default": false,
 		"description": "Less verbose conditions",
-		"tooltip": "Currently only used with DarkSky "
+		"tooltip": "Currently only used with DarkSky."
 	},
 	"useSymbolicIcons": {
 		"type": "checkbox",
@@ -396,7 +442,7 @@
 	},
 	"provider-explanation": {
 		"type": "label",
-		"description": "You can use several different weather forecast providers that you choose under the first Weather Tab in this Configuration panel. Some providers require a API key to work, some have regional limits, differ in forecast length, and they all need a functional internet connection to the chosen service. The options are described in detail on the Cinnamon Spices Website, what you can access with the button further down."
+		"description": "You can use several different weather forecast providers that you choose under the first Weather Tab in this Configuration panel. Some providers require a API key to work, some have regional limits, differ in forecast length, and they all need a functional internet connection to work. The options are described in detail on the Cinnamon Spices Website, what you can access with the button further down."
 	},
 	"loc-info": {
 		"type": "label",
