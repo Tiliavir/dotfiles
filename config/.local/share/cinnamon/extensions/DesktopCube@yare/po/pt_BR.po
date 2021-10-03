@@ -1,66 +1,67 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Marcelo Aof, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-02 21:49+0000\n"
-"PO-Revision-Date: 2021-09-26 08:16+0200\n"
-"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"PO-Revision-Date: 2021-09-26 21:23-0300\n"
 "Language-Team: \n"
-"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: Marcelo Aof\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: pt_BR\n"
 
 #. metadata.json->name
 msgid "Desktop Cube"
-msgstr "Asztal Kocka"
+msgstr "Cubo de áreas de trabalho"
 
 #. metadata.json->description
 msgid "Compiz Cube-like animation for workspace switching"
-msgstr "Compiz kocka szerű animáció a munkaterületek közti váltásra"
+msgstr "Alterne os espaços de trabalho com uma animação inspirada nos cubos do Compiz"
 
 #. settings-schema.json->header1->description
 msgid "General"
-msgstr "Általános"
+msgstr "Visão geral"
 
 #. settings-schema.json->animationTime->description
 msgid "Animation duration"
-msgstr "Animáció időtartama"
+msgstr "Duração da animação"
 
 #. settings-schema.json->pullaway->description
 msgid "Pullaway proportion from screen"
-msgstr "Képernyőről való elhúzás mértéke"
+msgstr "Proporção de afastamento da tela"
 
 #. settings-schema.json->header2->description
 msgid "Effects"
-msgstr "Effektusok"
+msgstr "Efeitos"
 
 #. settings-schema.json->scaleEffect->description
 msgid "Scale effect"
-msgstr "Eltávolodás effektus"
+msgstr "Efeito de afastamento da tela"
 
 #. settings-schema.json->unscaleEffect->description
 msgid "Unscale effect"
-msgstr "Közelítés effektus"
+msgstr "Efeito de aproximação da tela"
 
 #. settings-schema.json->rotateEffect->description
 msgid "Begin rotate effect"
-msgstr "Forgás kezdetének effektusa"
+msgstr "Início do efeito de rotação"
 
 #. settings-schema.json->unrotateEffect->description
 msgid "End rotate effect"
-msgstr "Forgás végének effektusa"
+msgstr "Fim do efeito de rotação"
 
 #. settings-schema.json->header3->description
 msgid "System Settings"
-msgstr "Rendszerbeállítások"
+msgstr "Configurações do sistema"
 
 #. settings-schema.json->workspaces_btn->description
 msgid "Open Cinnamon Settings to manage Workspaces"
-msgstr "Cinnamon beállítások megnyitása a munkaterületek kezeléséhez"
+msgstr "Abrir as configurações do Cinnamon para ajustar os espaços de trabalho"
