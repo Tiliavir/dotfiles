@@ -97,7 +97,7 @@ additionals() {
   echo " - intellij idea, download, not flatpak!
  - create new GitHub SSH key and store in ~/Code/tiliavir_rsa
  - load cinnamon-menu.json config (right click on Starter icon > Configure)
- - clone CV and Thesis
+ - clone private repos
  - set users/pwds in FileZilla
  - momentum for firefox
 
