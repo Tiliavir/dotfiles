@@ -1,8 +1,10 @@
 [/]
 alttab-switcher-delay=100
 app-menu-label=''
-applet-cache-updated=1601719114
-command-history=['terminal', 'r']
+applet-cache-updated=1659262358
+command-history=['r', 'idea', 'terminal', 'firefox']
+desklet-cache-updated=1602270283
+desklet-snap-interval=25
 desktop-effects-close-effect='traditional'
 desktop-effects-close-time=120
 desktop-effects-close-transition='easeOutQuad'
@@ -21,11 +23,12 @@ desktop-effects-tile-transition='easeInQuad'
 desktop-effects-unmaximize-effect='none'
 desktop-effects-unmaximize-time=100
 desktop-effects-unmaximize-transition='easeNone'
-enabled-applets=['panel1:left:0:menu@cinnamon.org:26', 'panel1:center:0:grouped-window-list@cinnamon.org:28', 'panel1:right:1:systray@cinnamon.org:29', 'panel1:right:3:xapp-status@cinnamon.org:30', 'panel1:right:4:notifications@cinnamon.org:31', 'panel1:right:5:printers@cinnamon.org:32', 'panel1:right:6:removable-drives@cinnamon.org:33', 'panel1:right:7:keyboard@cinnamon.org:34', 'panel1:right:8:network@cinnamon.org:35', 'panel1:right:9:sound@cinnamon.org:36', 'panel1:right:10:power@cinnamon.org:37', 'panel1:right:11:calendar@cinnamon.org:38', 'panel1:left:2:weather@mockturtl:39', 'panel1:right:0:SpicesUpdate@claudiux:40', 'panel1:left:1:user@cinnamon.org:41']
+enabled-applets=['panel1:left:0:menu@cinnamon.org:26', 'panel1:center:0:grouped-window-list@cinnamon.org:28', 'panel1:right:6:systray@cinnamon.org:29', 'panel1:right:8:xapp-status@cinnamon.org:30', 'panel1:right:9:notifications@cinnamon.org:31', 'panel1:right:10:printers@cinnamon.org:32', 'panel1:right:11:removable-drives@cinnamon.org:33', 'panel1:right:12:keyboard@cinnamon.org:34', 'panel1:right:13:network@cinnamon.org:35', 'panel1:right:14:sound@cinnamon.org:36', 'panel1:right:15:power@cinnamon.org:37', 'panel1:right:16:calendar@cinnamon.org:38', 'panel1:right:5:SpicesUpdate@claudiux:40', 'panel1:right:0:batterymonitor@pdcurtis:46']
+enabled-desklets=@as []
 enabled-extensions=['!opacify@anish.org', '!Win7AltTab@entelechy', 'DesktopCube@yare']
-extension-cache-updated=1601719113
-hotcorner-layout=['expo:false:0', 'scale:false:0', 'scale:false:0', 'desktop:false:0']
-next-applet-id=42
+extension-cache-updated=1659262358
+hotcorner-layout=['expo:false:0', 'scale:false:0', 'scale:false:0', 'scale:false:0']
+next-applet-id=47
 no-adjacent-panel-barriers=false
 panel-edit-mode=false
 panel-zone-icon-sizes='[{"panelId": 1, "left": 0, "center": 0, "right": 24}]'
@@ -40,22 +43,50 @@ panels-show-delay=['1:0', '2:0']
 [cinnamon-session]
 quit-time-delay=60
 
+[desktop/a11y/applications]
+screen-keyboard-enabled=true
+screen-magnifier-enabled=false
+
+[desktop/a11y/keyboard]
+bouncekeys-delay=300
+mousekeys-accel-time=300
+mousekeys-init-delay=300
+mousekeys-max-speed=10
+slowkeys-delay=300
+togglekeys-enable-osd=true
+
+[desktop/a11y/mouse]
+dwell-threshold=10
+dwell-time=1.2
+secondary-click-time=1.2
+
+[desktop/applications/calculator]
+exec='gnome-calculator'
+
+[desktop/applications/terminal]
+exec='gnome-terminal'
+
 [desktop/background]
-picture-uri='file:///home/markus/Pictures/bg.jpg'
+picture-options='zoom'
+picture-uri='file:///home/markus/Pictures/wp/sezgin_flower.jpg'
 
 [desktop/background/slideshow]
 delay=15
-image-source='xml:///usr/share/cinnamon-background-properties/linuxmint.xml'
+image-source='directory:///home/markus/Pictures/wp'
+random-order=true
+slideshow-enabled=true
 
 [desktop/interface]
 clock-show-date=true
 cursor-blink-time=1200
 cursor-size=24
+cursor-theme='DMZ-White'
 gtk-overlay-scrollbars=true
-gtk-theme='Mint-Y-Dark-Blue'
+gtk-theme='Mint-Y-Dark-Aqua'
 icon-theme='We10X'
 scaling-factor=uint32 0
 text-scaling-factor=1.0
+toolkit-accessibility=true
 
 [desktop/keybindings]
 custom-list=['__dummy__', 'custom0']
@@ -72,6 +103,7 @@ screenshot=@as []
 
 [desktop/keybindings/wm]
 begin-move=@as []
+begin-resize=@as []
 move-to-side-e=@as []
 push-snap-left=@as []
 push-snap-right=@as []
@@ -80,19 +112,39 @@ switch-to-workspace-right=['<Primary><Super>Right']
 switch-windows-backward=['<Shift><Alt>Tab']
 toggle-on-all-workspaces=['<Super>Tab']
 
+[desktop/media-handling]
+autorun-never=false
+autorun-x-content-ignore=@as []
+autorun-x-content-open-folder=@as []
+autorun-x-content-start-app=['x-content/unix-software']
+
 [desktop/screensaver]
+allow-media-control=false
 lock-delay=uint32 15
+lock-enabled=true
+use-custom-format=false
 
 [desktop/session]
 idle-delay=uint32 600
 
 [desktop/sound]
 event-sounds=false
+maximum-volume=100
 
 [desktop/wm/preferences]
 min-window-opacity=30
 mouse-button-modifier=''
-theme='Mint-Y-Dark'
+theme='Mint-Y'
+
+[keyboard]
+activation-mode='on-demand'
+keyboard-position='bottom'
+keyboard-size=4
+keyboard-type='touch'
+
+[launcher]
+check-frequency=300
+memory-limit=2048
 
 [muffin]
 resize-threshold=24
@@ -110,10 +162,15 @@ drag-threshold=8
 motion-threshold=1
 
 [settings-daemon/peripherals/touchpad]
+horizontal-scrolling=false
 motion-threshold=1
 
 [settings-daemon/peripherals/touchscreen]
 orientation-lock=false
+
+[settings-daemon/peripherals/wacom/b76cc7b1bbdc489e93909d2043031de8-i2c:056a:521a/0xfffff]
+buttonmapping=[1, 2, 3, 0, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+pressurecurve=[0, 0, 100, 100]
 
 [settings-daemon/plugins/power]
 lid-close-ac-action='suspend'
@@ -129,7 +186,8 @@ menus-have-icons=true
 
 [sounds]
 login-enabled=true
+login-file='/usr/share/mint-artwork/sounds/notification.oga'
 
 [theme]
 name='CBlue'
-theme-cache-updated=1601719114
+theme-cache-updated=1659262358

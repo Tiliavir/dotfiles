@@ -24,7 +24,7 @@ install-software() {
   sudo dselect update
 
   # shellcheck disable=SC2024
-  sudo dpkg --set-selections <"$TDF/packages.list"
+  sudo dpkg --set-selections <"$TDF/config/packages.list"
   sudo apt-get update && sudo apt-get -u dselect-upgrade
 
   # todo firefox : momentum
@@ -65,7 +65,7 @@ clone() {
   cd "$HOME/Code" || exit
   while read -r repo; do
     git clone "$repo"
-  done <"$TDF/repos.list"
+  done <"$TDF/config/repos.list"
   cd - || exit
 }
 
@@ -82,10 +82,12 @@ style() {
   flameshot config -t false
 
   "$HOME/Code/We10X-icon-theme/install.sh"
+  "$HOME/Code/grub2-theme/install.sh"
 
   # linux mint theme including key-bindings
-  sed -i.bak -e "s|/home/markus/|$HOME/|g" "$TDF/cinnamon-backup"
-  dconf load /org/cinnamon/ <"$TDF/cinnamon-backup"
+  # gathered with: `dconf dump /org/cinnamon/ > ./cinnamon-backup`
+  sed -i.bak -e "s|/home/markus/|$HOME/|g" "$TDF/config/cinnamon-backup"
+  dconf load /org/cinnamon/ <"$TDF/config/cinnamon-backup"
 
   # Terminal config: https://ohmybash.github.io/
   (sh -c "$(curl -fsSL https://raw.github.com/ohmybash/oh-my-bash/master/tools/install.sh)")
