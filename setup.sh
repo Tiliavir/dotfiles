@@ -14,6 +14,8 @@ cleanup() {
   printf "\nCleanup\n=======\n";
   sudo apt-get remove -yq --purge libreoffice*
   sudo apt-get remove -yq --purge thunderbird
+  sudo apt-get remove -yq --purge flatpak
+  sudo apt-get remove -yq --purge snapd
   sudo apt-get clean
   sudo apt-get autoremove
 }
