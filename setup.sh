@@ -28,9 +28,6 @@ install-software() {
   # shellcheck disable=SC2024
   sudo dpkg --set-selections <"$TDF/config/packages.list"
   sudo apt-get update && sudo apt-get -u dselect-upgrade
-
-  # todo firefox : momentum
-  # todo download intellij idea ultimate and execute
 }
 
 link-dotfiles() {
@@ -83,7 +80,7 @@ style() {
 
   flameshot config -t false
 
-  "$HOME/Code/We10X-icon-theme/install.sh"
+  "$HOME/Code/Tela-circle-icon-theme/install.sh blue"
   "$HOME/Code/grub2-theme/install.sh"
 
   # linux mint theme including key-bindings
@@ -103,10 +100,6 @@ additionals() {
  - load cinnamon-menu.json config (right click on Starter icon > Configure)
  - clone private repos
  - set users/pwds in FileZilla
- - momentum for firefox
-
-Optional steps:
- - grub-customizer"
 }
 
 neofetch
