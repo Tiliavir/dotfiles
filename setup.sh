@@ -80,7 +80,7 @@ style() {
   "$TDF/mod/grub2-theme/install.sh -b -s 1080p -t whitesur -i white"
 
   # Install Plymouth theme
-  cp $TDF/mod/plymouth/linux-penguin /usr/share/plymouth/themes/
+  cp "$TDF/mod/plymouth/linux-penguin" "/usr/share/plymouth/themes/"
   update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/linux-penguin/linux-penguin.plymouth 800
   update-initramfs -u
 
