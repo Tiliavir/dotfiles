@@ -76,10 +76,16 @@ style() {
   ln -s "$TDF/img/grub.png" "$HOME/Pictures/grub.png"
   ln -s "$TDF/img/profile.png" "$HOME/Pictures/profile.png"
 
-  flameshot config -t false
-
-  "$TDF/mod/icons/tela/install.sh blue"
+  # install grub theme
   "$TDF/mod/grub2-theme/install.sh -b -s 1080p -t whitesur -i white"
+
+  # Install Plymouth theme
+  cp $TDF/mod/plymouth/linux-penguin /usr/share/plymouth/themes/
+  update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/linux-penguin/linux-penguin.plymouth 800
+  update-initramfs -u
+
+  # install icon set
+  "$TDF/mod/icons/tela/install.sh blue"
 
   # linux mint theme including key-bindings
   # gathered with: `dconf dump /org/cinnamon/ > ./cinnamon-backup`
@@ -89,6 +95,9 @@ style() {
   # Terminal config: https://ohmybash.github.io/
   (sh -c "$(curl -fsSL https://raw.github.com/ohmybash/oh-my-bash/master/tools/install.sh)")
   sed -i.bak -e "s/OSH_THEME=.*/OSH_THEME=\"mbriggs\"/" "$HOME/.bashrc"
+
+  # flameshot config: hide tray icon
+  flameshot config -t false
 }
 
 additionals() {
