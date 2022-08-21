@@ -1,0 +1,9 @@
+[submodule "mod/icons/we10x"]
+	path = mod/icons/we10x
+	url = https://github.com/yeyushengfan258/We10X-icon-theme.git
+[submodule "mod/icons/tela"]
+	path = mod/icons/tela
+	url = https://github.com/vinceliuice/Tela-circle-icon-theme.git
+[submodule "mod/grub2-theme"]
+	path = mod/grub2-theme
+	url = https://github.com/tiliavir/grub2-theme.git

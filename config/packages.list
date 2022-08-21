@@ -2,7 +2,6 @@ default-jdk	install
 docker.io	install
 filezilla	install
 flameshot	install
-kupfer	install
 nodejs	install
 npm	install
 keepass2	install

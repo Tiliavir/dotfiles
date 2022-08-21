@@ -128,7 +128,7 @@
         "units": "px",
         "description": "Icon size",
         "dependency": "menu-custom",
-        "value": 32
+        "value": 26.0
     },
     "menu-label": {
         "type": "entry",
@@ -142,7 +142,7 @@
         "type": "switch",
         "default": false,
         "description": "Use a fixed menu height",
-        "tooltip": "Keep the size of the menu the same now matter how many favorites or categories there are.",
+        "tooltip": "Keep the size of the menu the same no matter how many favorites or categories there are.",
         "value": false
     },
     "menu-height": {
@@ -208,7 +208,7 @@
         "units": "px",
         "description": "Favorites icon size",
         "dependency": "favbox-show",
-        "value": 20.0
+        "value": 20
     },
     "show-favorites": {
         "type": "switch",
@@ -291,5 +291,5 @@
         "callback": "_launch_editor",
         "tooltip": "Press this button to customize your menu entries."
     },
-    "__md5__": "c152555b992ad64460760bcb9c99d27f0a188a8ff9c3d3f4fa2c1cd14fe0d0a0"
+    "__md5__": "38c9122e36f6267fae12706a694ac35f0a188a8ff9c3d3f4fa2c1cd14fe0d0a0"
 }

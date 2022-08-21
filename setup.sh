@@ -43,10 +43,8 @@ link-dotfiles() {
   ln -sf "$TDF/config/.gitconfig" "$HOME/.gitconfig"
   ln -sf "$TDF/config/.bashrc" "$HOME/.bashrc"
   ln -sf "$TDF/config/.ssh/config" "$HOME/.ssh/config"
-  ln -sf "$TDF/config/.config/kupfer/kupfer.cfg" "$HOME/.config/kupfer/kupfer.cfg"
   ln -sf "$TDF/config/.config/filezilla/sitemanager.xml" "$HOME/.config/filezilla/sitemanager.xml"
   ln -sf "$TDF/config/.config/autostart/Flameshot.desktop" "$HOME/.config/autostart/Flameshot.desktop"
-  ln -sf "$TDF/config/.config/autostart/kupfer.desktop" "$HOME/.config/autostart/kupfer.desktop"
 
   ln -sf "$TDF/config/.themes/" "$HOME/"
   ln -sf "$TDF/config/.local/share/cinnamon" "$HOME/.local/share"
@@ -55,7 +53,7 @@ link-dotfiles() {
 clone() {
   printf "\nClone\n=====\n";
   sudo apt-get install -y git
-  git clone https://github.com/tiliavir/dotfiles.git "$TDF"
+  git clone --recurse-submodules https://github.com/tiliavir/dotfiles.git "$TDF"
 
   cd "$TDF" || exit
   git pull
@@ -80,8 +78,8 @@ style() {
 
   flameshot config -t false
 
-  "$HOME/Code/Tela-circle-icon-theme/install.sh blue"
-  "$HOME/Code/grub2-theme/install.sh"
+  "$TDF/mod/icons/tela/install.sh blue"
+  "$TDF/mod/grub2-theme/install.sh -b -s 1080p -t whitesur -i white"
 
   # linux mint theme including key-bindings
   # gathered with: `dconf dump /org/cinnamon/ > ./cinnamon-backup`
@@ -99,7 +97,7 @@ additionals() {
  - create new GitHub SSH key and store in ~/Code/tiliavir_rsa
  - load cinnamon-menu.json config (right click on Starter icon > Configure)
  - clone private repos
- - set users/pwds in FileZilla
+ - set users/pwds in FileZilla";
 }
 
 neofetch
