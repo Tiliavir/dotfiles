@@ -1,4 +1,4 @@
-# Linux Mint 20 Customization Script
+# Linux Mint Customization Script
 [![Build State](https://github.com/tiliavir/dotfiles/workflows/Shellcheck/badge.svg)](https://github.com/Tiliavir/mvw-creator/actions)
 
 This script documents my Linux Mint Cinnamon 21 "Vanessa" setup.
