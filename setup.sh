@@ -15,6 +15,7 @@ cleanup() {
   sudo apt-get remove -yq --purge libreoffice*
   sudo apt-get remove -yq --purge thunderbird
   sudo apt-get remove -yq --purge flatpak
+  sudo apt-get remove -yq --purge gir1.2-flatpak-1.0
   sudo apt-get remove -yq --purge snapd
   sudo apt-get clean
   sudo apt-get autoremove
