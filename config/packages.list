@@ -2,14 +2,14 @@ default-jdk	install
 docker.io	install
 filezilla	install
 flameshot	install
+hugo	install
+keepass2	install
+musescore3	install
 nodejs	install
 npm	install
-keepass2	install
 python3-pip	install
 python3-gi	install
 python-nemo	install
 texlive-full	install
 texmaker	install
-musescore3	install
-hugo	install
 x11-touchscreen-calibrator	install
