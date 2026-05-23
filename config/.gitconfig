@@ -6,3 +6,5 @@
 	helper = store
 [core]
 	autocrlf = input
+[init]
+	defaultBranch = main

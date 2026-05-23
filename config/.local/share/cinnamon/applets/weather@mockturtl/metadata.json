@@ -3,7 +3,7 @@
     "name": "Weather",
     "description": "View your local weather forecast",
     "max-instances": 3,
-    "version": "3.6.3",
+    "version": "3.6.9",
     "multiversion": true,
     "cinnamon-version": [
         "2.2",
@@ -21,6 +21,6 @@
         "4.6",
         "4.8"
     ],
-    "author": "Gr3q",
-    "last-edited": 1722195682
+    "author": "none",
+    "last-edited": 1777665724
 }
